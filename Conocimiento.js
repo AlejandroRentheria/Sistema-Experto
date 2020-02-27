@@ -1,0 +1,1 @@
+Conocimiento="(PV&PM&AR&DPM&D&CC)->ALZ;(IA&U&CN&DG&DF&T&DC&F&E)->AMI;(PP&DA&E&NV&DR&F)->APE;(DPR&OP&T&MNA&DD&CF)->ASM;(T&M&DPR&F)->BRO;";

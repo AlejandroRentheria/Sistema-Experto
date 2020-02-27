@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<script src="Conocimiento.js"></script>
+<script src="Literales.js"></script>
+<!--<script src="Reglas.js"></script>-->
+<script src="Diccionario.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Health You</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="css-reg/estilos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/half-slider.css" rel="stylesheet">
+  <link href="css/agency.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <title>Formulario de Registro</title>
+
+  <style type="text/css">
+    body {
+      margin-top: 20px;
+      background: #eee;
+    }
+
+    .container {
+      margin-right: auto;
+      margin-left: auto;
+      padding-right: 15px;
+      padding-left: 15px;
+      width: 100%;
+    }
+
+    @media (min-width: 576px) {
+      .container {
+        max-width: 540px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        max-width: 720px;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .container {
+        max-width: 960px;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .container {
+        max-width: 1140px;
+      }
+    }
+
+    .card-columns .card {
+      margin-bottom: 0.75rem;
+    }
+
+    @media (min-width: 576px) {
+      .card-columns {
+        column-count: 3;
+        column-gap: 1.25rem;
+      }
+
+      .card-columns .card {
+        display: inline-block;
+        width: 100%;
+      }
+    }
+
+    .text-muted {
+      color: #9faecb !important;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    .mb-3 {
+      margin-bottom: 1rem !important;
+    }
+
+    .input-group {
+      position: relative;
+      display: flex;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Health You</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        MENU
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="main.html" id="navbarDropdownMenuLink">
+              <i class="fa fa-home"> Inicio</i>
+            </a>
+          </li>
+          <li class="nav-item dropdown active">
+            <a class="nav-link dropdown" href="experto.html" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-envelope"> Experto</i>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+              <a class="dropdown-item" href="experto.html">Consultar</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <br><br>
+  <div class="col-xs-6 col-md-6">
+    <center>
+      <h1>Preguntas</h1>
+    </center>
+  </div>
+  <div class="contenedor-formulario">
+    <div class="wrap">
+      <form class="formulario" name="formulario_registro">
+        <div>
+          <div class="input-group radio" id="Preguntas"></div>
+          <button type="button" class="btn btn-primary btn-lg btn-block " id="Resp">Consultar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="col-xs-6 col-md-6">
+    <center>
+      <h1>Enfermedades</h1>
+    </center>
+  </div>
+  <div class="contenedor-formulario">
+    <div class="wrap">
+      <form class="formulario" name="formulario_registro">
+        <div>
+          <div class="input-group radio" id="Enfermedades">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>
+<script src="Backend.js"></script>
+<script type="text/javascript">
+  var SysExp = new Backend();
+  let arrayToBack = new Array();
+  /* la clase SysEXp tiene 3 objetos
+   *literales;	-> ve la classe Litereles
+   *reglas;  	-> [literal que es consecuente,Arreglo de literales que son antecedentes y , Faltantes que usaria para censadas
+   *basicas;	-> todas las literales que son basicas y su formato es ["nombre","Definicion",1 o 0 en int]
+   *resuletas;	->solo despues de hacer ForwardChaning(AUX) con Aux en el formato de las basicas te regresara un arreglo de strings que son lo que encontro.
+   */
+  for (var i = SysExp.basicas.length - 1; i >= 0; i--) {
+    let id = SysExp.basicas[i][0];
+    let id2 = id + "-2";
+    $("#Preguntas").append("<div class='col-sm-12'><p class='font-weight-bold text-dark'>" + "¿Tiene " + SysExp.basicas[i][1] + "?" + "</p></div>");
+    $("#Preguntas").append(
+      "<input type='radio' name='" + i + "' id='" + id + "' value='yes'><label for='" + id + "'>Sí</label>" + "        " +
+      "<input type='radio' name='" + i + "' id='" + id2 + "'  value='no'><label for='" + id2 + "'>No</label>"
+    );
+    $("#Preguntas").append("<br><br>");
+  }
+
+  if (arrayToBack.length > 0 || !!arrayToBack) {
+    $(document).ready(function() {
+      $("#Enfermedades").contents().unwrap().wrap("<div class='col-sm-12 text-center' id='Enfermedades'><p class='font-weight-bold text-dark'>Usted tiene que contestar la encusta</p></div>");
+    });
+  }
+  
+  $("#Resp").click(function() {
+    arrayToBack = [];
+    let espacio = "";
+    let valor = "";
+    for (var i = SysExp.basicas.length - 1; i >= 0; i--) {
+      let id = SysExp.basicas[i][0];
+      let id2 = SysExp.basicas[i][0] + "-2";
+      var elemento = document.getElementById(id);
+      var elemento2 = document.getElementById(id2);
+      if (elemento.checked) {
+        let id = elemento.id;
+        valor = "1"
+        let arrAux = new Array();
+        arrAux.push(id);
+        arrAux.push(espacio);
+        arrAux.push(valor);
+        arrayToBack.push(arrAux);
+      }
+      if (elemento2.checked) {
+        let id = elemento.id;
+        valor = "0"
+        let arrAux = new Array();
+        arrAux.push(id);
+        arrAux.push(espacio);
+        arrAux.push(valor);
+        arrayToBack.push(arrAux);
+      }
+    }
+    console.log(arrayToBack)
+    SysExp.ForwardChaning(arrayToBack);
+
+    if (!!SysExp.resueltas) {
+      for (var i = SysExp.resueltas.length - 1; i >= 0; i--) {
+        $("#Enfermedades").append("<div class='col-sm-12 text-center'><p class='font-weight-bold text-dark'>" + "Usted tiene: " + SysExp.resueltas[i] + "</p></div>");
+      }
+    } else {
+      $(document).ready(function() {
+        $("#Enfermedades").contents().unwrap().wrap("<div class='col-sm-12 text-center'><p class='font-weight-bold text-dark'>" + "Al parecer no tiene nada \n Consulte a su médico" + "</p></div>");
+      });
+    }
+
+  });
+</script>
+
+<!--
+
+  "<div class='col-sm-4';'>" + "<ul><li>" + SysExp.resueltas[i] + "</li></ul>" + "</div>"
+ -->
