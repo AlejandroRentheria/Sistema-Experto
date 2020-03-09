@@ -104,7 +104,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Health You</a>
+      <a class="navbar-brand" href="main.html">Health You</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         MENU
         <span class="navbar-toggler-icon"></span>
@@ -129,12 +129,10 @@
     </div>
   </nav>
   <br><br>
-  <div class="col-xs-6 col-md-6">
-    <center>
-      <h1>Preguntas</h1>
-    </center>
+  <div class="text-center" id="FormQuestion1">
+    <center class="text-center"><h1>Preguntas</h1></center>
   </div>
-  <div class="contenedor-formulario">
+  <div class="contenedor-formulario" id="FormQuestion">
     <div class="wrap">
       <form class="formulario" name="formulario_registro">
         <div>
@@ -144,17 +142,15 @@
       </form>
     </div>
   </div>
-
-  <div class="col-xs-6 col-md-6">
-    <center>
-      <h1>Enfermedades</h1>
-    </center>
+  <div class="text-center" id="Result1">
+    <center class="text-center"><h1>Enfermedades</h1></center>
   </div>
-  <div class="contenedor-formulario">
+  <div class="contenedor-formulario" id="Result">
     <div class="wrap">
       <form class="formulario" name="formulario_registro">
         <div>
-          <div class="input-group radio" id="Enfermedades">
+          <div class="input-group radio" id="Enfermedades"></div>
+          <div class="input-group radio" id="BotonOk"></div>
           </div>
         </div>
       </form>
@@ -173,6 +169,10 @@
    *basicas;	-> todas las literales que son basicas y su formato es ["nombre","Definicion",1 o 0 en int]
    *resuletas;	->solo despues de hacer ForwardChaning(AUX) con Aux en el formato de las basicas te regresara un arreglo de strings que son lo que encontro.
    */
+   $(document).ready(function(){
+     $("#Result").hide();
+     $("#Result1").hide();
+   });
   for (var i = SysExp.basicas.length - 1; i >= 0; i--) {
     let id = SysExp.basicas[i][0];
     let id2 = id + "-2";
@@ -184,12 +184,6 @@
     $("#Preguntas").append("<br><br>");
   }
 
-  if (arrayToBack.length > 0 || !!arrayToBack) {
-    $(document).ready(function() {
-      $("#Enfermedades").contents().unwrap().wrap("<div class='col-sm-12 text-center' id='Enfermedades'><p class='font-weight-bold text-dark'>Usted tiene que contestar la encusta</p></div>");
-    });
-  }
-  
   $("#Resp").click(function() {
     arrayToBack = [];
     let espacio = "";
@@ -218,23 +212,32 @@
         arrayToBack.push(arrAux);
       }
     }
-    console.log(arrayToBack)
     SysExp.ForwardChaning(arrayToBack);
-
-    if (!!SysExp.resueltas) {
-      for (var i = SysExp.resueltas.length - 1; i >= 0; i--) {
-        $("#Enfermedades").append("<div class='col-sm-12 text-center'><p class='font-weight-bold text-dark'>" + "Usted tiene: " + SysExp.resueltas[i] + "</p></div>");
-      }
+    $(document).ready(function(){
+      $("#Result").show();
+      $("#Result1").show();
+    });
+    if (SysExp.resueltas.length > 0) {
+      for (var i = SysExp.resueltas.length - 1; i >= 0; i--) { $("#Enfermedades").append("<div class='col-sm-12 text-justify' id='Enfermedades'><p class='font-weight-bold text-dark'>" + "Usted tiene: " + SysExp.resueltas[i] + "</p></div>"); }
+      //ocultar formulario
+      $(document).ready(function(){
+        $("#FormQuestion").hide();
+        $("#FormQuestion1").hide();
+      });
+      $("#BotonOk").append("<button type='button' class='btn btn-primary btn-lg btn-block' id='ReLoad'>Vover a Consulta</button>");
+      $("#ReLoad").click(function() {
+        location.reload();
+      });
     } else {
       $(document).ready(function() {
-        $("#Enfermedades").contents().unwrap().wrap("<div class='col-sm-12 text-center'><p class='font-weight-bold text-dark'>" + "Al parecer no tiene nada \n Consulte a su médico" + "</p></div>");
+        $("#FormQuestion").hide();
+        $("#FormQuestion1").hide();
+        $("#Enfermedades").append("<div class='col-sm-12 text-center' id='Enfrmedades'><p class='font-weight-bold text-dark'>" + "Al parecer no tiene nada \n Consulte a su médico" + "</p></div>");
+        $("#BotonOk").append("<button type='button' class='btn btn-primary btn-lg btn-block' id='ReLoad'>Vover a Consulta</button>");
+        $("#ReLoad").click(function() {
+          location.reload();
+        });
       });
     }
-
   });
 </script>
-
-<!--
-
-  "<div class='col-sm-4';'>" + "<ul><li>" + SysExp.resueltas[i] + "</li></ul>" + "</div>"
- -->

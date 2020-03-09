@@ -67,19 +67,17 @@ class Backend {
     this.basicas = basicas;
   }
 
-  ForwardChaning(basicas) {
+  async ForwardChaning(basicas) {
+    this.resueltas = [];
     this.Acomodador(basicas);
     var salir = false;
-    //var salir=true;
     do {
       salir = false;
       for (var i = this.reglas.length - 1; i >= 0; i--) {
         if (this.valorcheck(this.reglas[i][0].name) == 2 && this.reglas[i][0].basica != "1") {
           console.log(i + " " + this.reglas[i][0].name);
           if (this.resolve(this.reglas[i])) {
-            //alert(this.reglas[i][0].name+" was resolved");
             this.reglas[i][0].setValor(1);
-            //alert(this.valorcheck(this.reglas[i][0].name));
             salir = true;
             this.reglas[i].pop;
           }
